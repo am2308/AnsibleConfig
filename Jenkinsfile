@@ -2,7 +2,6 @@ pipeline {
   agent any
   parameters {
     string (name: 'KubeApiEndpoint')
-    string (name: 'GitUsername')
   } 
   stages {
     stage('Install kubernetes components') {
