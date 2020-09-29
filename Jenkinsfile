@@ -35,18 +35,9 @@ pipeline {
       steps {
         sh """
         cd /root/AnsibleConfig/${params.env}/${params.version}
+        sleep 60s
         kubectl get nodes --insecure-skip-tls-verify -o wide
         kubectl cluster-info --insecure-skip-tls-verify
-        """
-      }
-    }
-    stage('Pusshing back changes back to SCM') {
-      steps {
-        sh """
-        cd /root/AnsibleConfig
-        git add .
-        git commit -m "adding updated config files"
-        git push https://${params.GitUsername}:${params.GitPassword}@github.com/am2308/AnsibleConfig.git --all
         """
       }
     }
