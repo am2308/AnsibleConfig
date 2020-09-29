@@ -8,7 +8,7 @@ pipeline {
     stage('Install kubernetes components') {
       steps {
         sh """
-        cd /root/AnsibleConfig/${params.env}/${params.version}/ansible_kube8_installation
+        cd /root/AnsibleConfig/${params.env}/${params.version}
         ls -lart
         ansible-playbook infra.yaml -i hosts/groups
         """
@@ -17,7 +17,7 @@ pipeline {
     stage('Install kubectl component on master and nodes') {
       steps {
         sh """
-        cd /root/AnsibleConfig/${params.env}/${params.version}/ansible_kube8_installation
+        cd /root/AnsibleConfig/${params.env}/${params.version}
         ls -lart
         ansible-playbook kubectl.yaml --extra-vars "kubernetes_api_endpoint=${params.KubeApiEndpoint}"
         """
@@ -26,7 +26,7 @@ pipeline {
     stage('Configure routing between master and nodes') {
       steps {
         sh """
-        cd /root/AnsibleConfig/${params.env}/${params.version}/ansible_kube8_installation
+        cd /root/AnsibleConfig/${params.env}/${params.version}
         ansible-playbook kubernetes-routing.yaml -i hosts/groups
         """
       }
@@ -34,7 +34,7 @@ pipeline {
     stage('Run kubectl command to versify cluster info after configuration') {
       steps {
         sh """
-        cd /root/AnsibleConfig/${params.env}/${params.version}/ansible_kube8_installation
+        cd /root/AnsibleConfig/${params.env}/${params.version}
         kubectl get nodes -o wide
         kubectl cluster-info
         """
