@@ -4,6 +4,16 @@ pipeline {
     string (name: 'KubeApiEndpoint')
   } 
   stages {
+    stage('Geting nodes ips and creating host file') {
+      steps {
+        sh """
+        cd /root/AnsibleConfig/${params.env}/${params.version}
+        chmod 755 GetClusterNodesIp.py
+        python GetClusterNodesIp.py ${params.Region}
+        mv -f groups hosts/groups
+        """
+      }
+    }
     stage('Install kubernetes components') {
       steps {
         sh """
