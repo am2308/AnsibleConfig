@@ -35,8 +35,8 @@ pipeline {
       steps {
         sh """
         cd /root/AnsibleConfig/${params.env}/${params.version}
-        kubectl get nodes -o wide
-        kubectl cluster-info
+        kubectl get nodes --insecure-skip-tls-verify -o wide
+        kubectl cluster-info --insecure-skip-tls-verify
         """
       }
     }
