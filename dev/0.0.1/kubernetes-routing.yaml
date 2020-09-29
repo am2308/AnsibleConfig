@@ -12,7 +12,7 @@
 
   # Run kuberctl on local machine to gather kubernetes nodes "facts"
   - name: Gather Kubernetes nodes facts (on localhost)
-    local_action: command kubectl get nodes --output=json
+    local_action: command kubectl get nodes --insecure-skip-tls-verify --output=json
     register: result
   - set_fact:
       kubernetes_nodes: "{{ result.stdout | from_json }}"
