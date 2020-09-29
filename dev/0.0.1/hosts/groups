@@ -1,10 +1,10 @@
 [etcd]
-3.236.19.238
+3.210.200.226
 
 [worker]
-worker0 ansible_ssh_host=3.223.129.184
-worker1 ansible_ssh_host=34.200.237.92
-worker2 ansible_ssh_host=3.231.31.78
+worker0 ansible_ssh_host=3.210.205.118
+worker1 ansible_ssh_host=18.234.184.137
+worker2 ansible_ssh_host=3.80.12.177
 
 [controller]
-controller  ansible_ssh_host=34.237.142.163
+controller  ansible_ssh_host=3.80.159.97
