@@ -1,6 +1,6 @@
 ---
 - name: Install docker
-  shell: "apt-get install docker.io y"
+  shell: "apt-get install docker.io -y"
   become: true
   
 - name: Add internal DNS name to hosts file
