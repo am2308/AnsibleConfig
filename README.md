@@ -1,5 +1,7 @@
 # Configure and Install Kubernetes components using Ansible
 
+## Components 
+
 A worked example to setup kubernetes cluster using Ansible.
 
 - Kube-Controller
@@ -84,7 +86,6 @@ Verify pods and service are up and running.
 ```
 $ kubectl get pods -o wide
 ...
-```
 
 Retrieve the port *nginx* has been exposed on:
 
@@ -97,7 +98,6 @@ Now you should be able to access *nginx* default page:
 ```
 $ curl http://<worker-public-ip>:<exposed-port>
 ...
-```
 
 # Advantages of module
 
