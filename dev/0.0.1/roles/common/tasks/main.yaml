@@ -1,0 +1,18 @@
+---
+- name: Install docker
+  shell: "apt-get install docker.io y"
+  become: true
+  
+- name: Add internal DNS name to hosts file
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '^127\.0\.0\.1'
+    line: '127.0.0.1 localhost {{ ec2_private_dns_name }}'
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+
+- name: Set internal DNS name as hostname
+  shell: "hostname {{ ec2_private_dns_name }}"
+  become: true
