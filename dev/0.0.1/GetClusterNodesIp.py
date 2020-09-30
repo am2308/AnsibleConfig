@@ -31,7 +31,12 @@ for reservation in response["Reservations"]:
 
 data = data + "\n[worker]\n"
 for i in range(0,len(workerList)):
-        data = data + workerList[i].split(':')[0] + " ansible_ssh_host=" + workerList[i].split(':')[1] + "\n"
+        if workList[i].split(':')[0] == "worker-0":
+            data = data + "worker0 ansible_ssh_host=" + workerList[i].split(':')[1] + "\n"
+        elif workList[i].split(':')[0] == "worker-1":
+            data = data + "worker1 ansible_ssh_host=" + workerList[i].split(':')[1] + "\n"
+        elif workList[i].split(':')[0] == "worker-2":
+            data = data + "worker2 ansible_ssh_host=" + workerList[i].split(':')[1] + "\n"
 
 f = open('groups' ,'w')
 f.write(data)
