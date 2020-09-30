@@ -46,11 +46,11 @@
   - assert:
       that: # TODO Make assertions more strict
         - "'{{ kubernetes_pod_cidrs[0]|ipaddr('network') }}' in result.stdout"
-        #- "'{{ kubernetes_pod_cidrs[1]|ipaddr('network') }}' in result.stdout"
-        #- "'{{ kubernetes_pod_cidrs[2]|ipaddr('network') }}' in result.stdout"
+        - "'{{ kubernetes_pod_cidrs[1]|ipaddr('network') }}' in result.stdout"
+        - "'{{ kubernetes_pod_cidrs[2]|ipaddr('network') }}' in result.stdout"
         - "'{{ kubernetes_nodes_addresses[0] }}' in result.stdout"
-        #- "'{{ kubernetes_nodes_addresses[1] }}' in result.stdout"
-        #- "'{{ kubernetes_nodes_addresses[2] }}' in result.stdout"
+        - "'{{ kubernetes_nodes_addresses[1] }}' in result.stdout"
+        - "'{{ kubernetes_nodes_addresses[2] }}' in result.stdout"
 
   - name: Add iptable rule to masquerade traffic bound outside VPC CIDR
     command: "iptables -t nat -A POSTROUTING ! -d {{ internal_cidr }} -o eth0 -j MASQUERADE"
