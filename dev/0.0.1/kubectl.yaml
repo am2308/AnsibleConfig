@@ -39,3 +39,9 @@
 
   - name: Switch kubectl to default context
     shell: "kubectl config use-context default-context"
+    
+  - name: Set context for namespace default
+    shell: "kubectl config set-context dev --namespace=default --cluster={{ kubernetes_cluster_name }} --user={{ kubectl_user }}"
+  
+  - name: Set context for namespace kube-system
+    shell: "kubectl config set-context prod --namespace=kube-system --cluster={{ kubernetes_cluster_name }} --user={{ kubectl_user }}"
