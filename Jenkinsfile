@@ -50,5 +50,13 @@ pipeline {
         """
       }
     }
+    stage('Smoke testing by deploying nginx after configuring kube8') {
+      steps {
+        sh """
+        cd /root/AnsibleConfig/${params.env}/${params.version}
+        ansible-playbook smoke-testing.yaml -i hosts/groups
+        """
+      }
+    }
   }
 }
