@@ -1,0 +1,17 @@
+---
+#####################
+# Deploy Nginx
+#####################
+
+- hosts: controller
+  gather_facts: false
+  become: true
+  tasks:
+    - name: deploy nginx
+      shell: "kubectl run --generator=run-pod/v1 nginx --image=nginx --port=80"
+    - name: expose nginx to nodeport
+      shell: "kubectl expose pods nginx --type NodePort"
+    - name: Get nodeport
+      shell: "kubectl get svc nginx --output=jsonpath='{range .spec.ports[0]}{.nodePort}'"
+    - name: Get nginx status
+      shell: "kubectl get pods -o wide"
