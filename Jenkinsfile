@@ -55,6 +55,8 @@ pipeline {
         sh """
         cd /root/AnsibleConfig/${params.env}/${params.version}
         ansible-playbook smoke-testing.yaml -i hosts/groups
+        kubectl get svc nginx --output=jsonpath='{range .spec.ports[0]}{.nodePort}' --insecure-skip-tls-verify
+        kubectl get pods -o wide --insecure-skip-tls-verify
         """
       }
     }
