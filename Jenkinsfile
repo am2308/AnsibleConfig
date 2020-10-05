@@ -40,11 +40,21 @@ pipeline {
         """
       }
     }
-    stage('Run kubectl command to versify cluster info after configuration') {
+    
+    stage('Unit testing for installed components on respective nodes') {
+      steps {
+        sh """
+        cd /root/AnsibleConfig/${params.env}/${params.version}
+        sh unit-testing.sh
+        """
+      }
+    }
+    stage('Integration testing to confirm components interconnectivity') {
       steps {
         sh """
         cd /root/AnsibleConfig/${params.env}/${params.version}
         sleep 60s
+        kubectl get componentstatuses --insecure-skip-tls-verify
         kubectl get nodes --insecure-skip-tls-verify -o wide
         kubectl cluster-info --insecure-skip-tls-verify
         """
