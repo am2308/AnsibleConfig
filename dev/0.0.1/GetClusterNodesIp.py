@@ -22,7 +22,8 @@ for reservation in response["Reservations"]:
         for tags in instance['Tags']:
                 if tags['Key'] == 'Name' and tags['Value'] in InstanceList and instance['State']['Name'] == "running":
                         if tags['Value'].startswith('etcd'):
-                                data = data + "[etcd]\n" + instance['PublicIpAddress'] + "\n"
+                                #data = data + "[etcd]\n" + instance['PublicIpAddress'] + "\n"
+                                data = data + "[etcd]\netcd ansible_ssh_host=" + instance['PublicIpAddress'] + "\n"
                         elif tags['Value'].startswith('cont'):
                                 data = data + "\n[controller]\ncontroller ansible_ssh_host=" + instance['PublicIpAddress'] + "\n"
                         elif tags['Value'].startswith('worker'):
